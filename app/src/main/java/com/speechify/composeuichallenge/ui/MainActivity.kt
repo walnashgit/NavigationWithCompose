@@ -35,10 +35,7 @@ private fun Greeting(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Replace me with actual UI",
-            textAlign = TextAlign.Center
-        )
+        Loading()
     }
 }
 
