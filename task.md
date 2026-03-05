@@ -27,24 +27,6 @@ The project is already set up with all the necessary dependencies, so you can fo
 
 ---
 
-## 📊 Evaluation Criteria
-
-When reviewing your solution, we will focus on the following aspects:
-
-- **Architecture** – 45%  
-  How well the project is structured, including separation of concerns, scalability, and overall code organization.
-
-- **UI Implementation** – 30%  
-  How closely the UI matches the provided designs and how well Jetpack Compose is used.
-
-- **Search Functionality** – 18%  
-  How effectively the search feature is implemented.
-
-- **Code Style & Clean Code** – 7%  
-  Code readability, naming conventions, and adherence to clean code practices.
-
----
-
 ## 🧠 Task details
 
 This challenge requires you to create an app about **Books**.  
