@@ -6,14 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.speechify.composeuichallenge.ui.theme.ComposeUIChallengeTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.serialization.Serializable
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -23,26 +26,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeUIChallengeTheme {
-                Greeting()
+                val navController = rememberNavController()
+                NavHost(navController, startDestination = BookList) {
+                    composable<BookList> {
+                        BookScreen(onDetailsClicked = { bookId ->
+                            navController.navigate(BookDetails(bookId = bookId))
+                        })
+                    }
+                    composable<BookDetails> { backStackEntry ->
+                        val bookDetails: BookDetails = backStackEntry.toRoute()
+                        BookDetailScreen(bookDetails.bookId)
+                    }
+                }
             }
         }
     }
 }
 
-@Composable
-private fun Greeting(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Loading()
-    }
-}
+@Serializable
+object BookList
 
-@Preview(showBackground = true)
-@Composable
-private fun GreetingPreview() {
-    ComposeUIChallengeTheme {
-        Greeting()
-    }
-}
+@Serializable
+data class BookDetails(val bookId: String)
